@@ -4,6 +4,14 @@
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 
+
+static const unsigned int gappih    = 6;       /* horiz inner gap between windows */
+static const unsigned int gappiv    = 6;       /* vert inner gap between windows */
+static const unsigned int gappoh    = 6;       /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov    = 6;       /* vert outer gap between windows and screen edge */
+static const int smartgaps          = 4;        /* 1 means no outer gap when there is only one window */
+
+
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayspacing = 2;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
@@ -112,6 +120,27 @@ static Key keys[] = {
 	
     { MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+
+
+	{ MODKEY|Mod4Mask,              XK_h,      incrgaps,       {.i = +1 } },
+	{ MODKEY|Mod4Mask,              XK_l,      incrgaps,       {.i = -1 } },
+	{ MODKEY|Mod4Mask|ShiftMask,    XK_h,      incrogaps,      {.i = +1 } },
+	{ MODKEY|Mod4Mask|ShiftMask,    XK_l,      incrogaps,      {.i = -1 } },
+	{ MODKEY|Mod4Mask|ControlMask,  XK_h,      incrigaps,      {.i = +1 } },
+	{ MODKEY|Mod4Mask|ControlMask,  XK_l,      incrigaps,      {.i = -1 } },
+	{ MODKEY|Mod4Mask,              XK_0,      togglegaps,     {0} },
+	{ MODKEY|Mod4Mask|ShiftMask,    XK_0,      defaultgaps,    {0} },
+	{ MODKEY,                       XK_y,      incrihgaps,     {.i = +1 } },
+	{ MODKEY,                       XK_o,      incrihgaps,     {.i = -1 } },
+	{ MODKEY|ControlMask,           XK_y,      incrivgaps,     {.i = +1 } },
+	{ MODKEY|ControlMask,           XK_o,      incrivgaps,     {.i = -1 } },
+	{ MODKEY|Mod4Mask,              XK_y,      incrohgaps,     {.i = +1 } },
+	{ MODKEY|Mod4Mask,              XK_o,      incrohgaps,     {.i = -1 } },
+	{ MODKEY|ShiftMask,             XK_y,      incrovgaps,     {.i = +1 } },
+	{ MODKEY|ShiftMask,             XK_o,      incrovgaps,     {.i = -1 } },
+
+
+
 	{ MODKEY,                       XK_space, zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 
@@ -150,7 +179,7 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 
-    { MODKEY|ShiftMask,             XK_r,      self_restart,   {0} },
+   { MODKEY|ShiftMask,             XK_r,      self_restart,   {0} },
 
 	{ MODKEY|ShiftMask,             XK_e,      quit,           {0} },
 };
