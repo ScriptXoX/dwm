@@ -40,6 +40,12 @@ static Sp scratchpads[] = {
 	{"keepassxc",   spcmd3},
 };
 
+static const char *const autostart[] = {
+	"sh", "-c","~/.dwm/autostart.sh",NULL, /* terminate */
+	"sh", "-c","while true;do ~/.dwm/bar.sh;sleep 1;done;",NULL /* bar */
+
+};
+
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 static const Rule rules[] = {
