@@ -141,9 +141,9 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_o,      incrovgaps,     {.i = -1 } },
 */
 
-    { MODKEY|ShiftMask,             XK_minus,  spawn,	       SHCMD("pamixer --allow-boost -d 10") },
-    { MODKEY|ShiftMask,             XK_equal,  spawn,	       SHCMD("pamixer --allow-boost -i 10") },
-    { MODKEY|ShiftMask,             XK_0,      spawn,	       SHCMD("pamixer -t ") }, 
+    { MODKEY|ShiftMask,             XK_minus,  spawn,	       SHCMD("pamixer --allow-boost -d 10;kill -44 $(pidof dwmblocks)") },
+    { MODKEY|ShiftMask,             XK_equal,  spawn,	       SHCMD("pamixer --allow-boost -i 10;kill -44 $(pidof dwmblocks)") },
+    { MODKEY|ShiftMask,             XK_0,      spawn,	       SHCMD("pamixer -t;pkill -RTMIN+12 dwmblocks") }, 
 
 	{ MODKEY,	        	XK_r,		spawn,		SHCMD("st -e htop") },
 
