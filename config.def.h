@@ -73,10 +73,10 @@ static const Rule rules[] = {
 	/* class                 instance                  title       tags mask     isfloating   isterminal  noswallow  monitor */
 	{ "Gimp",	             NULL,		            	NULL,		0,				0,		 0,           0,      	 -1 },
 	{ "Firefox",             NULL,		            	NULL,		1 << 8,			0,		 0,           0,      	 -1 },
-	{ NULL,		             "spterm",	            	NULL,		SPTAG(0),		1,		 1,           0,      	 -1 },
+	{ "st-256color",         "spterm",	            	NULL,		SPTAG(0),		1,		 1,           0,      	 -1 },
 	{ NULL,		             "spfm",	            	NULL,		SPTAG(1),		1,		 0,           0,      	 -1 },
 	{ "netease-cloud-music", NULL,	                    NULL,		SPTAG(2),		1,	     0,		      0,         -1 },
-//	{ "st-256color",NULL,   	NULL,		0,		        1,	     1,		        0,         -1 },
+	{ "st-256color",        "st-256color",              NULL,		0,		        0,	     1,		      0,         -1 },
 };
 
 /* layout(s) */
@@ -112,23 +112,26 @@ static const char *termcmd[]  = { "st", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
-	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_b,      togglebar,      {0} },
+	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } }, //dmenu_菜单
+	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } }, //终端
+
+	{ MODKEY,                       XK_b,      togglebar,      {0} },     //隐藏显示状态栏
+
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
 
   /*{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
 	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },*/
 	
-    { MODKEY,                       XK_h,      setmfact,       {.f = -0.02} },
+    //调整主界面大小
+    { MODKEY,                       XK_h,      setmfact,       {.f = -0.02} }, 
 	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.02} },
 
 
-	{ MODKEY,                       XK_a,      togglegaps,     {0} },
-	{ MODKEY|ShiftMask,             XK_a,      defaultgaps,    {0} },
-	{ MODKEY,                       XK_z,      incrgaps,       {.i = +1 } },
-	{ MODKEY,                       XK_x,      incrgaps,       {.i = -1 } },
+	{ MODKEY,                       XK_a,      togglegaps,     {0} },        //打开关闭边距
+	{ MODKEY|ShiftMask,             XK_a,      defaultgaps,    {0} },        //重置到默认边距
+	{ MODKEY,                       XK_z,      incrgaps,       {.i = +1 } }, //加大边距
+	{ MODKEY,                       XK_x,      incrgaps,       {.i = -1 } }, //减小边距
 
 /*	{ MODKEY|Mod1Mask|ShiftMask,    XK_h,      incrogaps,      {.i = +1 } },
 	{ MODKEY|Mod1Mask|ShiftMask,    XK_l,      incrogaps,      {.i = -1 } },
@@ -144,16 +147,16 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_o,      incrovgaps,     {.i = -1 } },
 */
 
-    { MODKEY|ShiftMask,             XK_minus,  spawn,	       SHCMD("pamixer --allow-boost -d 10;kill -44 $(pidof dwmblocks)") },
-    { MODKEY|ShiftMask,             XK_equal,  spawn,	       SHCMD("pamixer --allow-boost -i 10;kill -44 $(pidof dwmblocks)") },
-    { MODKEY|ShiftMask,             XK_0,      spawn,	       SHCMD("pamixer -t;pkill -RTMIN+12 dwmblocks") }, 
+    { MODKEY|ShiftMask,             XK_minus,  spawn,	       SHCMD("pamixer --allow-boost -d 10;kill -44 $(pidof dwmblocks)") }, //音量减小
+    { MODKEY|ShiftMask,             XK_equal,  spawn,	       SHCMD("pamixer --allow-boost -i 10;kill -44 $(pidof dwmblocks)") }, //音量加大
+    { MODKEY|ShiftMask,             XK_0,      spawn,	       SHCMD("pamixer -t;pkill -RTMIN+12 dwmblocks") }, //静音
 
-	{ MODKEY,	        	XK_r,		spawn,		SHCMD("st -e htop") },
+	{ MODKEY,	        	XK_r,		spawn,		SHCMD("st -e htop") }, // htop
 
-	{ MODKEY,                       XK_space, zoom,           {0} },
-	{ MODKEY,                       XK_Tab,    view,          {0} },
+	{ MODKEY,                       XK_space, zoom,           {0} }, //切换为Master
+	{ MODKEY,                       XK_Tab,    view,          {0} }, //与之前Tag来回切换
 
-	{ MODKEY|ShiftMask,             XK_q,      killclient,     {0} },
+	{ MODKEY|ShiftMask,             XK_q,      killclient,     {0} }, //关闭应用
     /*
 	{ MODKEY|ShiftMask,             XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY|ShiftMask,             XK_f,      setlayout,      {.v = &layouts[1]} },
@@ -161,13 +164,13 @@ static Key keys[] = {
     */
 
 
-	{ MODKEY,		            	XK_w,		spawn,	   	    SHCMD("chromium --enable-features=WebUIDarkMode --force-dark-mode") },
+	{ MODKEY,		            	XK_w,		spawn,	   	    SHCMD("chromium --enable-features=WebUIDarkMode --force-dark-mode") }, //chromium 浏览器 暗黑模式
 
 	//{ MODKEY,                       XK_space,  setlayout,      {0} },
 
-	{ MODKEY,                       XK_f,      togglefullscr,     {0} },
-	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
-	{ MODKEY,                       XK_s,      togglesticky,   {0} },
+	{ MODKEY,                       XK_f,      togglefullscr,     {0} }, //全屏
+	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },  //悬浮切换
+	{ MODKEY,                       XK_s,      togglesticky,   {0} },  //固定磁铁
 
   /*{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
@@ -177,8 +180,9 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 */
 
-	{ MODKEY|ShiftMask,            	XK_Return, togglescratch,  {.ui = 0 } },
-	{ MODKEY|ShiftMask,            	XK_u,	   togglescratch,  {.ui = 1 } },
+    //便签 应用
+	{ MODKEY|ShiftMask,            	XK_Return, togglescratch,  {.ui = 0 } },  //ST 终端
+	{ MODKEY|ShiftMask,            	XK_u,	   togglescratch,  {.ui = 1 } },  //Ranger 文件管理
 	{ MODKEY|ShiftMask,            	XK_m,	   togglescratch,  {.ui = 2 } },
 
 
@@ -192,8 +196,8 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 
-    { MODKEY|ShiftMask,             XK_r,      self_restart,   {0} },
-	{ MODKEY|ShiftMask,             XK_e,      quit,           {0} },
+    { MODKEY|ShiftMask,             XK_r,      self_restart,   {0} }, //重启dwm
+	{ MODKEY|ShiftMask,             XK_e,      quit,           {0} }, //退出dwm
 };
 
 /* button definitions */
@@ -206,9 +210,9 @@ static Button buttons[] = {
 	{ ClkStatusText,        0,              Button1,        sigdwmblocks,   {.i = 1} },
 	{ ClkStatusText,        0,              Button2,        sigdwmblocks,   {.i = 2} },
 	{ ClkStatusText,        0,              Button3,        sigdwmblocks,   {.i = 3} },
-	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
-	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
-    { ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
+	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} }, // 移动窗口
+	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} }, //
+    { ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} }, //调整窗口大小
 	{ ClkTagBar,            0,              Button1,        view,           {0} },
 	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
