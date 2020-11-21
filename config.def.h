@@ -19,7 +19,7 @@ static const int showsystray        = 1;     /* 0 means no systray */
 
 static const int swallowfloating    = 0;        /* 1 means swallow floating windows by default */
 
-static const int showbar            = 1;        /* 0 means no bar */
+static const int showbar            = 0;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const Bool viewontag         = True;     /* Switch view on tag switch */
 //static const char *fonts[]          = { "monospace:size=10" };
@@ -59,6 +59,7 @@ static const char *const autostart[] = {
 	"sh", "-c","~/.dwm/autostart.sh",NULL, /* terminate */
 	"sh", "-c","~/.dwm/bar.sh",NULL, /* terminate */
 	"sh", "-c","~/.dwm/clock.sh",NULL, /* terminate */
+	//"st", "-e","yay","-Syu",NULL, /* terminate */
 	//"sh", "-c","while true;do ~/.dwm/bar.sh;sleep 1;done;",NULL /* bar */
 
 };
@@ -171,6 +172,7 @@ static Key keys[] = {
 
 	//{ MODKEY,                       XK_space,  setlayout,      {0} },
 
+	{ MODKEY,                       XK_l,      spawn,SHCMD("i3lock -c 000000") }, //锁屏
 	{ MODKEY,                       XK_f,      togglefullscr,     {0} }, //全屏
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },  //悬浮切换
 	{ MODKEY,                       XK_s,      togglesticky,   {0} },  //固定磁铁
