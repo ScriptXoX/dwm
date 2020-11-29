@@ -172,7 +172,7 @@ static Key keys[] = {
 
 	//{ MODKEY,                       XK_space,  setlayout,      {0} },
 
-	{ MODKEY,                       XK_l,      spawn,SHCMD("i3lock -c 000000") }, //锁屏
+	{ MODKEY|ShiftMask,             XK_l,      spawn,SHCMD("i3lock -c 000000") }, //锁屏
 	{ MODKEY,                       XK_f,      togglefullscr,     {0} }, //全屏
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },  //悬浮切换
 	{ MODKEY,                       XK_s,      togglesticky,   {0} },  //固定磁铁
