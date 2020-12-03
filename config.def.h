@@ -5,10 +5,10 @@ static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 
 
-static const unsigned int gappih    = 6;       /* horiz inner gap between windows */
-static const unsigned int gappiv    = 6;       /* vert inner gap between windows */
-static const unsigned int gappoh    = 6;       /* horiz outer gap between windows and screen edge */
-static const unsigned int gappov    = 6;       /* vert outer gap between windows and screen edge */
+static const unsigned int gappih    = 10;       /* horiz inner gap between windows */
+static const unsigned int gappiv    = 10;       /* vert inner gap between windows */
+static const unsigned int gappoh    = 10;       /* horiz outer gap between windows and screen edge */
+static const unsigned int gappov    = 10;       /* vert outer gap between windows and screen edge */
 static const int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 
 
@@ -168,9 +168,9 @@ static Key keys[] = {
     */
 
 
-	{ MODKEY,		            	XK_w,		spawn,	   	    SHCMD("chromium --enable-features=WebUIDarkMode --force-dark-mode") }, //chromium 浏览器 暗黑模式
+	{ MODKEY,		       	XK_w,      spawn,	   SHCMD("chromium --enable-features=WebUIDarkMode --force-dark-mode") }, //chromium 浏览器 暗黑模式
 
-	//{ MODKEY,                       XK_space,  setlayout,      {0} },
+	//{ MODKEY,                     XK_space,  setlayout,      {0} },
 
 	{ MODKEY|ShiftMask,             XK_l,      spawn,SHCMD("i3lock -c 000000") }, //锁屏
 	{ MODKEY,                       XK_f,      togglefullscr,     {0} }, //全屏
