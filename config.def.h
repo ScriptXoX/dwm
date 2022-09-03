@@ -30,8 +30,10 @@ static const char col_gray4[]       = "#eeeeee";  //#当前活动的title字体�
 static const char col_cyan[]        = "#505050";  //#title底色
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { "#bbbbbb", "#404040", "#404040" },
-	[SchemeSel]  = { "#eeeeee", "#606060", "#808080"  },
+	//[SchemeNorm] = { "#bbbbbb", "#404040", "#404040" },
+	//[SchemeSel]  = { "#eeeeee", "#606060", "#808080"  },
+	[SchemeSel] =   { "#fbfbfb", "#505050", "#505050" },
+	[SchemeNorm]  = { "#eeeeee", "#404040", "#404040"  },
 };
 
 
@@ -162,14 +164,14 @@ static const Key keys[] = {
 	{ Mod1Mask,                     	XK_equal,  setgaps,        {.i = +2 } },
 	{ Mod1Mask|ShiftMask,           	XK_equal,  setgaps,        {.i = 0  } },
 
-        { 0,                            	XF86XK_AudioMute,           spawn,      SHCMD("pamixer -t;pkill -RTMIN+10 dwmblocks;") },
+        { 0,                            	XF86XK_AudioMute,           spawn,  SHCMD("pamixer -t;pkill -RTMIN+10 dwmblocks;") },
 	{ 0,                            	XF86XK_AudioRaiseVolume,    spawn,      SHCMD("pamixer --allow-boost -i 5;pkill -RTMIN+10 dwmblocks") },
 	{ 0,                            	XF86XK_AudioLowerVolume,    spawn,      SHCMD("pamixer --allow-boost -d 5;pkill -RTMIN+10 dwmblocks") },
 
 	{ 0,                            	XF86XK_Calculator,          spawn,      SHCMD("st -e bc -l") },
 
-   	{ 0,                            	XF86XK_MonBrightnessUp,	    spawn,	SHCMD("light -A 5; pkill -RTMIN+9 dwmblocks") },
-	{ 0,                            	XF86XK_MonBrightnessDown,   spawn,	SHCMD("light -U 5; pkill -RTMIN+9 dwmblocks") },
+   	{ 0,                            	XF86XK_MonBrightnessUp,	    spawn,	SHCMD("light -A 5; pkill -RTMIN+7 dwmblocks") },
+	{ 0,                            	XF86XK_MonBrightnessDown,   spawn,	SHCMD("light -U 5; pkill -RTMIN+7 dwmblocks") },
 
 	{ MODKEY,                   		XK_w,	   spawn,           SHCMD("/usr/bin/google-chrome-stable")},
 	{ MODKEY,                   		XK_a,	   spawn,           SHCMD("~/.dwm/bin/flameshot")},
