@@ -55,7 +55,6 @@ static Sp scratchpads[] = {
 
 
 static const char *const autostart[] = {
-//	"sh", "-c","~/.dwm/autostart.sh",NULL, /* terminate */
 	"dwmblocks",NULL,
 	"redshift",NULL,
 	"fcitx5",NULL,
@@ -67,10 +66,11 @@ static const char *const autostart[] = {
     "wmname","LG3D",NULL,
     "batsignal","-b",NULL,
     "twmnd",NULL,
-   "sh", "-c","~/.dwm/clock.sh",NULL, /* terminate */
-   "sh", "-c","~/.dwm/battery-status.sh",NULL, /* terminate */
+   "sh", "-c","~/.dwm/clock.sh",NULL, 
+   //"sh", "-c","~/.dwm/battery-status.sh",NULL,
  //   "sh","-c","~/.dwm/bin/terminal",NULL
 };
+
 
 /* tagging */
 static const char *tags[] = { "1.cmd", "2.web", "3.code", "4.note","5.read","6.video", "7.music", "8.wmware", "9.otheres" };
