@@ -56,8 +56,8 @@ typedef struct {
 	const void *cmd;
 } Sp;
 const char *spcmd1[] = {"st", "-n", "spterm", "-g", "120x34", NULL };
-const char *spcmd2[] = {"st", "-n", "spfm", "-g", "144x41", "-e", "ranger", NULL };
-const char *spcmd3[] = {"lx-music-desktop", NULL };
+const char *spcmd2[] = {"st", "-n", "spfm",   "-g", "144x41", "-e", "ranger", NULL };
+const char *spcmd3[] = {"sh", "-n", "spmusic", "~/bin/music.sh",NULL };
 static Sp scratchpads[] = {
 	/* name          cmd  */
 	{"spterm",      spcmd1},
@@ -68,18 +68,18 @@ static Sp scratchpads[] = {
 
 
 static const char *const autostart[] = {
-////	"dwmblocks",NULL,
-//	"redshift",NULL,
-//	"fcitx5",NULL,
-//	"picom","-b","--experimental-backends",NULL,
-//    "sh","-c","sudo echo 3 | sudo tee /proc/sys/net/ipv4/tcp_fastopen ",NULL,
-//    "trojan-go","-config","/etc/trojan/config.json",NULL,
-//    "sh","-c","feh --bg-center ~/wallpaper/01.jpg",NULL,
-//    "xmodmap ~/.xmodmaprc",NULL,
-//    "wmname","LG3D",NULL,
-//    "batsignal","-b",NULL,
-//    "twmnd",NULL,
-   "sh", "-c","~/.dwm/clock.sh",NULL, 
+	"dwmblocks",NULL,
+    "redshift",NULL,
+    "fcitx5",NULL,
+    "picom","-b","--experimental-backends",NULL,
+    "sh","-c","sudo echo 3 | sudo tee /proc/sys/net/ipv4/tcp_fastopen ",NULL,
+    "trojan-go","-config","/etc/trojan/config.json",NULL,
+    "sh","-c","feh --bg-center ~/wallpaper/01.jpg",NULL,
+    "xmodmap ~/.xmodmaprc",NULL,
+    "wmname","LG3D",NULL,
+    "batsignal","-b",NULL,
+    "twmnd",NULL,
+    "sh", "-c","~/.dwm/clock.sh",NULL, 
    //"sh", "-c","~/.dwm/battery-status.sh",NULL,
  //   "sh","-c","~/.dwm/bin/terminal",NULL
 };
@@ -159,6 +159,8 @@ static const Key keys[] = {
     { MODKEY|ShiftMask,            		XK_Return, togglescratch,  {.ui = 0 } },
 	{ MODKEY,            				XK_e,	   togglescratch,  {.ui = 1 } },
 	{ MODKEY|ShiftMask,            		XK_m,	   togglescratch,  {.ui = 2 } },
+
+
 	{ MODKEY|ShiftMask,             	XK_l,      spawn,          {.v = lock } },
 
 
@@ -218,7 +220,7 @@ static const Button buttons[] = {
 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
-      //{ ClkClientWin,         MODKEY,         Button1,        resizemouse,    {0} },
+    { ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
 	{ ClkTagBar,            0,              Button1,        view,           {0} },
 	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
