@@ -11,7 +11,7 @@ static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows sel
 static const unsigned int systrayonleft = 0;   	/* 0: systray in the right corner, >0: systray on left of status text */
 static const unsigned int systrayspacing = 10;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
-static const int showsystray        = 1;     /* 0 means no systray */
+static const int showsystray        = 0;     /* 0 means no systray */
 
 
 static const int showbar            = 1;     /* 0 means no bar */
@@ -29,8 +29,8 @@ static const int horizpadbar        = 10;        /* horizontal padding for statu
 static const int vertpadbar         = 10;       /* vertical padding for statusbar */
 
 //与屏幕间距 
-static const int vertpad            = 0;       /* vertical padding of bar */  
-static const int sidepad            = 0;       /* horizontal padding of bar */
+static const int vertpad            = 10;       /* vertical padding of bar */  
+static const int sidepad            = 10;       /* horizontal padding of bar */
 
 //static const char *fonts[]          = { "monospace:size=10", "NotoColorEmoji:pixelsize=24:antialias=true"  };
 static const char *fonts[]          ={"Monaco:pixelsize=24:antialias=true", "NotoColorEmoji:pixelsize=24:antialias=true"};
@@ -113,6 +113,8 @@ static const Layout layouts[] = {
 	{ "[]=",      tile },    /* first entry is default */
 	{ "><>",      NULL },    /* no layout function means floating behavior */
 	{ "[M]",      monocle },
+	{ "|M|",      centeredmaster },
+	{ ">M>",      centeredfloatingmaster },
 };
 
 /* key definitions */
@@ -141,6 +143,8 @@ static const Key keys[] = {
 	{ MODKEY,                       	XK_b,      togglebar,      {0} },
 	{ MODKEY,                       	XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       	XK_k,      focusstack,     {.i = -1 } },
+
+
 //	{ MODKEY,                       	XK_i,      incnmaster,     {.i = +1 } },
 //	{ MODKEY,                       	XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       	XK_h,      setmfact,       {.f = -0.05} },
@@ -151,6 +155,9 @@ static const Key keys[] = {
 	{ MODKEY,                       	XK_t,      setlayout,      {.v = &layouts[0]} },
 //	{ MODKEY,                       	XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       	XK_m,      setlayout,      {.v = &layouts[2]} },
+    { MODKEY,                       XK_u,      setlayout,      {.v = &layouts[3]} },
+	{ MODKEY,                       XK_o,      setlayout,      {.v = &layouts[4]} },
+
 //	{ MODKEY,                       	XK_equal,  setlayout,      {0} },
 	{ MODKEY,                       	XK_f,      togglefullscr,  {0} },
 	{ MODKEY|ShiftMask,             	XK_space,  togglefloating, {0} },
