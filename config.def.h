@@ -73,7 +73,7 @@ static const char *const autostart[] = {
     "fcitx5",NULL,
     "picom","-b","--experimental-backends",NULL,
     "sh","-c","sudo echo 3 | sudo tee /proc/sys/net/ipv4/tcp_fastopen ",NULL,
-    "trojan-go","-config","/etc/trojan/config.json",NULL,
+    "trojan","-c","/etc/trojan/config.json",NULL,
     "sh","-c","feh --bg-center ~/wallpaper/01.jpg",NULL,
     "xmodmap ~/.xmodmaprc",NULL,
     "wmname","LG3D",NULL,
