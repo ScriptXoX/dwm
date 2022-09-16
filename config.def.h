@@ -7,6 +7,11 @@ static const unsigned int gappx     = 10;        /* gaps between windows */
 
 
 static const unsigned int snap      = 32;       /* snap pixel */
+
+
+static const int swallowfloating    = 1;        /* 1 means swallow floating windows by default */
+
+
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayonleft = 0;   	/* 0: systray in the right corner, >0: systray on left of status text */
 static const unsigned int systrayspacing = 10;   /* systray spacing */
@@ -23,7 +28,7 @@ static const int topbar             = 1;     /* 0 means bottom bar */
 #define ICONSIZE 28   /* icon size */
 #define ICONSPACING 6 /* space between icon and title */
 
-static const Bool viewontag         = False;     /* Switch view on tag switch */
+static const Bool viewontag         = True;     /* Switch view on tag switch */
 //内边距
 static const int horizpadbar        = 10;        /* horizontal padding for statusbar */
 static const int vertpadbar         = 10;       /* vertical padding for statusbar */
@@ -93,13 +98,16 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	 /*class             instance        title       tags mask     isfloating   monitor */
-	{ "Gimp",            NULL,           NULL,       0,            1,           -1 },
-	{ "Firefox",         NULL,           NULL,       8,            0,           -1 },
-	{ "Google-chrome",   NULL,           NULL,       2,            0,           -1 },
-	{ NULL,	       	     "spterm",		 NULL,		SPTAG(0),		1,			 -1 },
-	{ NULL,		         "spfm",		 NULL,		SPTAG(1),		1,			 -1 },
-	{ NULL,		         "keepassxc",	 NULL,		SPTAG(2),		0,			 -1 },
+	 /*class             instance        title       tags mask     isfloating  isterminal  noswallow monitor */
+	{ "Gimp",            NULL,           NULL,       0,            0,          0,          -1,       -1 },
+	{ "firefox",         NULL,           NULL,       1<<7,         0,          0,          -1,       -1 },
+	{ "Google-chrome",   NULL,           NULL,       2,            0,          0,          -1,       -1 },
+
+	{ "st-256color",     NULL,           NULL,       0,            0,          1,           0,       -1 },
+	{ NULL,	       	     "spterm",		 NULL,		SPTAG(0),		1,		   1,           0,       -1 },
+
+	{ NULL,		         "spfm",		 NULL,		SPTAG(1),		1,		   0,           -1,       -1 },
+	{ NULL,		         "keepassxc",	 NULL,		SPTAG(2),		1,		   0,           -1,       -1 },
 };
 
 /* layout(s) */
