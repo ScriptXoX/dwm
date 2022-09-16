@@ -436,11 +436,12 @@ applyrules(Client *c)
 	if (ch.res_name)
 		XFree(ch.res_name);
 	c->tags = c->tags & TAGMASK ? c->tags & TAGMASK : (c->mon->tagset[c->mon->seltags] & ~SPTAGMASK);
-	if(viewonrulestag)
-	{
+
+	if(viewonrulestag & !c->isfloating){
+//    if( !(strcmp(instance,"spterm")==0 || strcmp(instance,"spranger")==0 || strcmp(instance,"splx-music-desktop")==0) & viewonrulestag ){
 		Arg a = {.ui = c->tags};
 		view(&a);
-	}
+    }
 }
 
 int
