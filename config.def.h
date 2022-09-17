@@ -26,7 +26,7 @@ static const int viewonrulestag 	= 1;		 /* 1 means when open applications view w
 
 
 
-#define ICONSIZE 28   /* icon size */
+#define ICONSIZE 24   /* icon size */
 #define ICONSPACING 6 /* space between icon and title */
 
 static const Bool viewontag         = True;     /* Switch view on tag switch */
@@ -63,7 +63,8 @@ typedef struct {
 } Sp;
 const char *spcmd1[] = {"st", "-n", "spterm", "-g", "120x34", NULL };
 const char *spcmd2[] = {"st", "-n", "spfm",   "-g", "144x41", "-e", "ranger", NULL };
-const char *spcmd3[] = {"sh", "-n", "spmusic", "~/bin/music.sh",NULL };
+//const char *spcmd3[] = {"sh", "-n", "spmusic", "~/bin/music.sh",NULL };
+const char *spcmd3[] = {"~/bin/music.sh",NULL };
 static Sp scratchpads[] = {
 	/* name          cmd  */
 	{"spterm",      spcmd1},
@@ -107,10 +108,21 @@ static const Rule rules[] = {
 
 
 	{ "code-oss",                NULL,                       NULL,       1<<2,         0,          0,          -1,       -1 },
-	{ "VNote",                   NULL,                       NULL,       1<<3,         0,          0,          -1,       -1 },
 
-	{ "st-256color",             NULL,                       NULL,       1,            0,          1,           0,       -1 },
-	{ "Alacritty",               NULL,                       NULL,       1,            0,          1,           0,       -1 },
+	{ "VNote",                   NULL,                       NULL,       1<<3,         0,          0,          -1,       -1 },
+	{ "Typora",                  NULL,                       NULL,       1<<3,         0,          0,          -1,       -1 },
+
+	{ "koodo-reader",            NULL,                       NULL,       1<<4,         0,          0,          -1,       -1 },
+
+	{ "vlc",                     NULL,                       NULL,       1<<5,         0,          0,          -1,       -1 },
+
+	{ "lx-music-desktop",        NULL,                       NULL,       1<<6,         0,          0,          -1,       -1 },
+
+	{ "VirtualBox Manager",      NULL,                       NULL,       1<<7,         0,          0,          -1,       -1 },
+
+
+	{ "st-256color",             NULL,                       NULL,       0,            0,          1,           0,       -1 },
+	{ "Alacritty",               NULL,                       NULL,       0,            0,          1,           0,       -1 },
 
 	{ NULL,	       	             "spterm",		             NULL,		SPTAG(0),		1,		   1,           0,       -1 },
 	{ NULL,		                 "spfm",		             NULL,		SPTAG(1),		1,		   0,           -1,       -1 },
