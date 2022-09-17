@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 2;        /* border pixel of windows */
+static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int gappx     = 10;        /* gaps between windows */
 
 
@@ -16,7 +16,7 @@ static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows sel
 static const unsigned int systrayonleft = 0;   	/* 0: systray in the right corner, >0: systray on left of status text */
 static const unsigned int systrayspacing = 10;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
-static const int showsystray        = 0;     /* 0 means no systray */
+static const int showsystray        = 1;     /* 0 means no systray */
 
 
 static const int showbar            = 1;     /* 0 means no bar */
@@ -26,8 +26,8 @@ static const int viewonrulestag 	= 1;		 /* 1 means when open applications view w
 
 
 
-#define ICONSIZE 24   /* icon size */
-#define ICONSPACING 6 /* space between icon and title */
+#define ICONSIZE 18   /* icon size */
+#define ICONSPACING 4 /* space between icon and title */
 
 static const Bool viewontag         = True;     /* Switch view on tag switch */
 //内边距
@@ -35,7 +35,7 @@ static const int horizpadbar        = 10;        /* horizontal padding for statu
 static const int vertpadbar         = 10;       /* vertical padding for statusbar */
 
 //与屏幕间距 
-static const int vertpad            = 10;       /* vertical padding of bar */  
+static const int vertpad            = 0;       /* vertical padding of bar */  
 static const int sidepad            = 10;       /* horizontal padding of bar */
 
 //static const char *fonts[]          = { "monospace:size=10", "NotoColorEmoji:pixelsize=24:antialias=true"  };
@@ -81,7 +81,7 @@ static const char *const autostart[] = {
     "picom","-b","--experimental-backends",NULL,
     "sh","-c","sudo echo 3 | sudo tee /proc/sys/net/ipv4/tcp_fastopen ",NULL,
     "trojan","-c","/etc/trojan/config.json",NULL,
-    "sh","-c","feh --bg-center ~/wallpaper/01.jpg",NULL,
+    "sh","-c","feh --bg-center ~/wallpaper/ios-11-stock-original-4k-ij-2880x1800.jpg",NULL,
     "xmodmap ~/.xmodmaprc",NULL,
     "wmname","LG3D",NULL,
     "batsignal","-b",NULL,
@@ -110,6 +110,7 @@ static const Rule rules[] = {
 	{ "code-oss",                NULL,                       NULL,       1<<2,         0,          0,          -1,       -1 },
 
 	{ "VNote",                   NULL,                       NULL,       1<<3,         0,          0,          -1,       -1 },
+	{ "WizNote",                 NULL,                       NULL,       1<<3,         0,          0,          -1,       -1 },
 	{ "Typora",                  NULL,                       NULL,       1<<3,         0,          0,          -1,       -1 },
 
 	{ "koodo-reader",            NULL,                       NULL,       1<<4,         0,          0,          -1,       -1 },
