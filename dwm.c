@@ -400,6 +400,7 @@ applyrules(Client *c)
 {
 	const char *class, *instance;
 	unsigned int i;
+	unsigned int found=0;
 	const Rule *r;
 	Monitor *m;
 	XClassHint ch = { NULL, NULL };
@@ -424,6 +425,7 @@ applyrules(Client *c)
 			if ((r->tags & SPTAGMASK) && r->isfloating) {
 				c->x = c->mon->wx + (c->mon->ww / 2 - WIDTH(c) / 2);
 				c->y = c->mon->wy + (c->mon->wh / 2 - HEIGHT(c) / 2);
+                found=1;
 			}
 
 			for (m = mons; m && m->num != r->monitor; m = m->next);
@@ -437,8 +439,8 @@ applyrules(Client *c)
 		XFree(ch.res_name);
 	c->tags = c->tags & TAGMASK ? c->tags & TAGMASK : (c->mon->tagset[c->mon->seltags] & ~SPTAGMASK);
 
-	if(viewonrulestag & !c->isfloating){
-//    if( !(strcmp(instance,"spterm")==0 || strcmp(instance,"spranger")==0 || strcmp(instance,"splx-music-desktop")==0) & viewonrulestag ){
+	//if(viewonrulestag & !c->isfloating){
+	if(viewonrulestag & !found){
 		Arg a = {.ui = c->tags};
 		view(&a);
     }

@@ -1,7 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int gappx     = 10;        /* gaps between windows */
 
 
@@ -51,8 +51,8 @@ static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	//[SchemeNorm] = { "#bbbbbb", "#404040", "#404040" },
 	//[SchemeSel]  = { "#eeeeee", "#606060", "#808080"  },
-	[SchemeSel] =   { "#fbfbfb", "#505050", "#505050" },
-	[SchemeNorm]  = { "#eeeeee", "#404040", "#404040"  },
+	[SchemeSel] =   { "#fbfbfb", "#505050", "#808080" },
+	[SchemeNorm]  = { "#eeeeee", "#404040", "#ffaabb"  },
 };
 
 
@@ -99,15 +99,22 @@ static const Rule rules[] = {
 	 *	WM_CLASS(STRING) = instance, class
 	 *	WM_NAME(STRING) = title
 	 */
-	 /*class             instance                    title       tags mask     isfloating  isterminal  noswallow monitor */
-	{ "Gimp",            NULL,                       NULL,       0,            0,          0,          -1,       -1 },
-	{ "firefox",         NULL,                       NULL,       1<<7,         0,          0,          -1,       -1 },
-	{ "Google-chrome",   NULL,                       NULL,       1<<1,         0,          0,          -1,       -1 },
+	 /*class                     instance                    title       tags mask     isfloating  isterminal  noswallow monitor */
+	{ "Gimp",                    NULL,                       NULL,       0,            0,          0,          -1,       -1 },
+	{ "firefox",                 NULL,                       NULL,       1<<1,         0,          0,          -1,       -1 },
+	{ "Google-chrome",           NULL,                       NULL,       1<<1,         0,          0,          -1,       -1 },
+	{ "Microsoft-edge-dev",      NULL,                       NULL,       1<<1,         0,          0,          -1,       -1 },
 
-	{ "st-256color",     NULL,                       NULL,       0,            0,          1,           0,       -1 },
-	{ NULL,	       	     "spterm",		             NULL,		SPTAG(0),		1,		   1,           0,       -1 },
-	{ NULL,		         "spfm",		             NULL,		SPTAG(1),		1,		   0,           -1,       -1 },
-	{ NULL,		         "splx-music-desktop",  	 NULL,		SPTAG(2),		1,		   0,           -1,       -1 },
+
+	{ "code-oss",                NULL,                       NULL,       1<<2,         0,          0,          -1,       -1 },
+	{ "VNote",                   NULL,                       NULL,       1<<3,         0,          0,          -1,       -1 },
+
+	{ "st-256color",             NULL,                       NULL,       1,            0,          1,           0,       -1 },
+	{ "Alacritty",               NULL,                       NULL,       1,            0,          1,           0,       -1 },
+
+	{ NULL,	       	             "spterm",		             NULL,		SPTAG(0),		1,		   1,           0,       -1 },
+	{ NULL,		                 "spfm",		             NULL,		SPTAG(1),		1,		   0,           -1,       -1 },
+	{ NULL,		                 "splx-music-desktop",  	 NULL,		SPTAG(2),		1,		   0,           -1,       -1 },
 };
 
 /* layout(s) */
