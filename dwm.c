@@ -1517,7 +1517,8 @@ monocle(Monitor *m)
 	if (n > 0) /* override layout symbol */
 		snprintf(m->ltsymbol, sizeof m->ltsymbol, "[%d]", n);
 	for (c = nexttiled(m->clients); c; c = nexttiled(c->next))
-		resize(c, m->wx, m->wy, m->ww, m->wh, 0, 0);
+		resize(c, m->wx + m->gappx, m->wy + m->gappx + 10, m->ww - (2*c->bw) - (2*m->gappx), m->wh - (2 * c->bw)- 30, 0, 0);
+//+		resize(c, m->wx + m->gappx, m->wy + my           , mw    - (2*c->bw) - m->gappx, h - (2*c->bw), 0);
 }
 
 void
@@ -2809,7 +2810,7 @@ updatesystray(void)
 		if (!(systray = (Systray *)calloc(1, sizeof(Systray))))
 			die("fatal: could not malloc() %u bytes\n", sizeof(Systray));
 
-        //m->by = m->by + 10;
+        m->by = m->by + 10;
 		systray->win = XCreateSimpleWindow(dpy, root, x, m->by, w, bh, 0, 0, scheme[SchemeSel][ColBg].pixel);
 		wa.event_mask        = ButtonPressMask | ExposureMask;
 		wa.override_redirect = True;
