@@ -26,8 +26,8 @@ static const int viewonrulestag 	= 1;		 /* 1 means when open applications view w
 
 
 
-#define ICONSIZE 18   /* icon size */
-#define ICONSPACING 4 /* space between icon and title */
+#define ICONSIZE 24  /* icon size */
+#define ICONSPACING 12 /* space between icon and title */
 
 static const Bool viewontag         = True;     /* Switch view on tag switch */
 //内边距
@@ -39,7 +39,7 @@ static const int vertpad            = 0;       /* vertical padding of bar */
 static const int sidepad            = 10;       /* horizontal padding of bar */
 
 //static const char *fonts[]          = { "monospace:size=10", "NotoColorEmoji:pixelsize=24:antialias=true"  };
-static const char *fonts[]          ={"Monaco:pixelsize=24:antialias=true", "NotoColorEmoji:pixelsize=20:antialias=true"};
+static const char *fonts[]          ={"Monaco:pixelsize=24:antialias=true", "NotoColorEmoji:pixelsize=24:antialias=true"};
 //static const char *fonts[]          = { "Hack Nerd Font Mono:size=10:antialias=true", "NotoColorEmoji:pixelsize=24:antialias=true"  };
 static const char dmenufont[]       = "Monaco:pixelsize=30:antialias=true";
 
@@ -213,8 +213,8 @@ static const Key keys[] = {
 //	{ MODKEY|ShiftMask,             	XK_comma,  tagmon,         {.i = -1 } },
 //	{ MODKEY|ShiftMask,             	XK_period, tagmon,         {.i = +1 } },
 //
-	{ Mod1Mask,                     	XK_minus,  setgaps,        {.i = -2 } },
-	{ Mod1Mask,                     	XK_equal,  setgaps,        {.i = +2 } },
+	{ Mod1Mask,                     	XK_minus,  setgaps,        {.i = +2 } },
+	{ Mod1Mask,                     	XK_equal,  setgaps,        {.i = -2 } },
 	{ Mod1Mask|ShiftMask,           	XK_equal,  setgaps,        {.i = 0  } },
 
         { 0,                            	XF86XK_AudioMute,           spawn,  SHCMD("pamixer -t;pkill -RTMIN+10 dwmblocks;") },

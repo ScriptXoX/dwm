@@ -1517,7 +1517,7 @@ monocle(Monitor *m)
 	if (n > 0) /* override layout symbol */
 		snprintf(m->ltsymbol, sizeof m->ltsymbol, "[%d]", n);
 	for (c = nexttiled(m->clients); c; c = nexttiled(c->next))
-		resize(c, m->wx + m->gappx, m->wy + m->gappx + 10, m->ww - (2*c->bw) - (2*m->gappx), m->wh - (2 * c->bw)- 30, 0, 0);
+		resize(c, m->wx + m->gappx, m->wy + m->gappx, m->ww - (2*c->bw) - 2 * m->gappx, m->wh - (2 * c->bw)-2 * m->gappx, 0, 0);
 //+		resize(c, m->wx + m->gappx, m->wy + my           , mw    - (2*c->bw) - m->gappx, h - (2*c->bw), 0);
 }
 
@@ -2306,7 +2306,7 @@ tile(Monitor *m)
 		mw = m->nmaster ? m->ww * m->mfact : 0;
 	else
 		mw = m->ww - m->gappx;
-	for (i = 0, my = ty = m->gappx+10, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
+	for (i = 0, my = ty = m->gappx, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
 		if (i < m->nmaster) {
 			h = (m->wh - my) / (MIN(n, m->nmaster) - i) - m->gappx;
 //			resize(c, m->wx + m->gappx, m->wy + my, mw - (2*c->bw) - m->gappx, h - (2*c->bw), 0);
@@ -2317,8 +2317,6 @@ tile(Monitor *m)
 				my += HEIGHT(c) + m->gappx;
 		} else {
 			h = (m->wh - ty) / (n - i) - m->gappx;
-//			resize(c, m->wx + mw + m->gappx, m->wy + ty, m->ww - mw - (2*c->bw) - 2*m->gappx, h - (2*c->bw), 0);
-//			resize(c, m->wx + mw + m->gappx, m->wy + ty, m->ww - mw - 2*bw     -  2*m->gappx, h - 2*bw, bw, 0);
 			resize(c, m->wx + mw + m->gappx, m->wy + ty, m->ww - mw - (2*c->bw) - 2*m->gappx, h - (2*c->bw),bw, 0);
 			if (ty + HEIGHT(c) + m->gappx < m->wh)
 				ty += HEIGHT(c) + m->gappx;
@@ -2330,13 +2328,6 @@ togglebar(const Arg *arg)
 {
 	selmon->showbar = selmon->pertag->showbars[selmon->pertag->curtag] = !selmon->showbar;
 	updatebarpos(selmon);
-//	XMoveResizeWindow(dpy, selmon->barwin, selmon->wx + sp, selmon->by + vp, selmon->ww - 2 * sp, bh);
-//-	XMoveResizeWindow(dpy, selmon->barwin, selmon->wx, selmon->by, selmon->ww, bh);
-    if(selmon->showbar){
-      selmon->by = selmon->by + 10;
-    }else{
-      selmon->by = selmon->by - 10;
-    }
 	resizebarwin(selmon);
 	if (showsystray) {
 		XWindowChanges wc;
@@ -2814,7 +2805,7 @@ updatesystray(void)
 		if (!(systray = (Systray *)calloc(1, sizeof(Systray))))
 			die("fatal: could not malloc() %u bytes\n", sizeof(Systray));
 
-        m->by = m->by + 10;
+        //m->by = m->by + 10;
 		systray->win = XCreateSimpleWindow(dpy, root, x, m->by, w, bh, 0, 0, scheme[SchemeSel][ColBg].pixel);
 		wa.event_mask        = ButtonPressMask | ExposureMask;
 		wa.override_redirect = True;
