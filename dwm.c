@@ -2306,7 +2306,7 @@ tile(Monitor *m)
 		mw = m->nmaster ? m->ww * m->mfact : 0;
 	else
 		mw = m->ww - m->gappx;
-	for (i = 0, my = ty = m->gappx + 10, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
+	for (i = 0, my = ty = m->gappx+10, c = nexttiled(m->clients); c; c = nexttiled(c->next), i++)
 		if (i < m->nmaster) {
 			h = (m->wh - my) / (MIN(n, m->nmaster) - i) - m->gappx;
 //			resize(c, m->wx + m->gappx, m->wy + my, mw - (2*c->bw) - m->gappx, h - (2*c->bw), 0);
@@ -2332,7 +2332,11 @@ togglebar(const Arg *arg)
 	updatebarpos(selmon);
 //	XMoveResizeWindow(dpy, selmon->barwin, selmon->wx + sp, selmon->by + vp, selmon->ww - 2 * sp, bh);
 //-	XMoveResizeWindow(dpy, selmon->barwin, selmon->wx, selmon->by, selmon->ww, bh);
-    selmon->by = selmon->by + 10;
+    if(selmon->showbar){
+      selmon->by = selmon->by + 10;
+    }else{
+      selmon->by = selmon->by - 10;
+    }
 	resizebarwin(selmon);
 	if (showsystray) {
 		XWindowChanges wc;
@@ -2570,10 +2574,10 @@ updatebarpos(Monitor *m)
 	m->wh = m->mh;
 	if (m->showbar) {
 		m->wh = m->wh - vertpad - bh;
-		m->by = m->topbar ? m->wy : m->wy + m->wh + vertpad +10;
-		m->wy = m->topbar ? m->wy + bh + vp : m->wy + 10;
+		m->by = m->topbar ? m->wy : m->wy + m->wh + vertpad;
+		m->wy = m->topbar ? m->wy + bh + vp : m->wy;
 	} else
-		m->by = -bh - vp - 10;
+		m->by = -bh - vp;
 }
 
 void

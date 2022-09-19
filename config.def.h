@@ -67,12 +67,12 @@ typedef struct {
 const char *spcmd1[] = {"st", "-n", "spterm", "-g", "120x34", NULL };
 const char *spcmd2[] = {"st", "-n", "spfm",   "-g", "144x41", "-e", "ranger", NULL };
 //const char *spcmd3[] = {"sh", "-n", "spmusic", "~/bin/music.sh",NULL };
-const char *spcmd3[] = {"~/bin/music.sh",NULL };
+const char *spcmd3[] = {"st", "-n", "spmusic", "-g", "120x34", "-e", "cmus", NULL };
 static Sp scratchpads[] = {
 	/* name          cmd  */
 	{"spterm",      spcmd1},
 	{"spranger",    spcmd2},
-	{"splx-music-desktop",   spcmd3},
+	{"spmusic",   spcmd3},
 };
 
 
@@ -130,7 +130,7 @@ static const Rule rules[] = {
 
 	{ NULL,	       	             "spterm",		             NULL,		SPTAG(0),		1,		   1,           0,       -1 },
 	{ NULL,		                 "spfm",		             NULL,		SPTAG(1),		1,		   0,           -1,       -1 },
-	{ NULL,		                 "splx-music-desktop",  	 NULL,		SPTAG(2),		1,		   0,           -1,       -1 },
+	{ NULL,		                 "spmusic",  	 NULL,		SPTAG(2),		1,		   0,           -1,       -1 },
 };
 
 /* layout(s) */
@@ -186,8 +186,8 @@ static const Key keys[] = {
 	{ MODKEY,                       	XK_t,      setlayout,      {.v = &layouts[0]} },
 //	{ MODKEY,                       	XK_f,      setlayout,      {.v = &layouts[1]} },
 	{ MODKEY,                       	XK_m,      setlayout,      {.v = &layouts[2]} },
-    { MODKEY,                       XK_u,      setlayout,      {.v = &layouts[3]} },
-	{ MODKEY,                       XK_o,      setlayout,      {.v = &layouts[4]} },
+    { MODKEY,                           XK_u,      setlayout,      {.v = &layouts[3]} },
+	{ MODKEY,                           XK_o,      setlayout,      {.v = &layouts[4]} },
 
 //	{ MODKEY,                       	XK_equal,  setlayout,      {0} },
 	{ MODKEY,                       	XK_f,      togglefullscr,  {0} },
