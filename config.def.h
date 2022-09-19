@@ -31,15 +31,16 @@ static const int viewonrulestag 	= 1;		 /* 1 means when open applications view w
 
 static const Bool viewontag         = True;     /* Switch view on tag switch */
 //内边距
-static const int horizpadbar        = 10;        /* horizontal padding for statusbar */
-static const int vertpadbar         = 10;       /* vertical padding for statusbar */
+static const int horizpadbar        = 16;        /* horizontal padding for statusbar */
+static const int vertpadbar         = 16;       /* vertical padding for statusbar */
 
 //与屏幕间距 
 static const int vertpad            = 0;       /* vertical padding of bar */  
 static const int sidepad            = 10;       /* horizontal padding of bar */
 
 //static const char *fonts[]          = { "monospace:size=10", "NotoColorEmoji:pixelsize=24:antialias=true"  };
-static const char *fonts[]          ={"Monaco:pixelsize=24:antialias=true", "NotoColorEmoji:pixelsize=24:antialias=true"};
+static const char *fonts[]          ={"Monaco:pixelsize=24:antialias=true", "NotoColorEmoji:pixelsize=20:antialias=true"};
+//static const char *fonts[]          = { "Hack Nerd Font Mono:size=10:antialias=true", "NotoColorEmoji:pixelsize=24:antialias=true"  };
 static const char dmenufont[]       = "Monaco:pixelsize=30:antialias=true";
 
 static const char col_gray1[]       = "#303030";  //#状态条底色
@@ -51,8 +52,10 @@ static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	//[SchemeNorm] = { "#bbbbbb", "#404040", "#404040" },
 	//[SchemeSel]  = { "#eeeeee", "#606060", "#808080"  },
-	[SchemeSel] =   { "#fbfbfb", "#505050", "#808080" },
-	[SchemeNorm]  = { "#eeeeee", "#404040", "#ffaabb"  },
+	//[SchemeSel] =   { "#fbfbfb", "#505050", "#808080" },
+	//[SchemeNorm]  = { "#eeeeee", "#404040", "#ffaabb"  },
+    [SchemeNorm] = { "#eeeeee", "#777777", "#444444" }, 
+    [SchemeSel] = { "#ffffff", "#669966", "#42A5F5" },
 };
 
 
@@ -94,6 +97,7 @@ static const char *const autostart[] = {
 
 /* tagging */
 static const char *tags[] = { "1.cmd", "2.web", "3.code", "4.note","5.read","6.video", "7.music", "8.wmware", "9.otheres" };
+//static const char *tags[] = { "", "", "", "", "", "", "", "﬏", "", "" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -101,7 +105,6 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	 /*class                     instance                    title       tags mask     isfloating  isterminal  noswallow monitor */
-	{ "Gimp",                    NULL,                       NULL,       0,            0,          0,          -1,       -1 },
 	{ "firefox",                 NULL,                       NULL,       1<<1,         0,          0,          -1,       -1 },
 	{ "Google-chrome",           NULL,                       NULL,       1<<1,         0,          0,          -1,       -1 },
 	{ "Microsoft-edge-dev",      NULL,                       NULL,       1<<1,         0,          0,          -1,       -1 },
@@ -122,8 +125,8 @@ static const Rule rules[] = {
 	{ "VirtualBox Manager",      NULL,                       NULL,       1<<7,         0,          0,          -1,       -1 },
 
 
-	{ "st-256color",             NULL,                       NULL,       0,            0,          1,           0,       -1 },
-	{ "Alacritty",               NULL,                       NULL,       0,            0,          1,           0,       -1 },
+//	{ "terminal",                NULL,                       NULL,       1,            0,          1,           0,       -1 },
+//	{ "Alacritty",               NULL,                       NULL,       0,            0,          1,           0,       -1 },
 
 	{ NULL,	       	             "spterm",		             NULL,		SPTAG(0),		1,		   1,           0,       -1 },
 	{ NULL,		                 "spfm",		             NULL,		SPTAG(1),		1,		   0,           -1,       -1 },
@@ -131,7 +134,7 @@ static const Rule rules[] = {
 };
 
 /* layout(s) */
-static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.75; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */

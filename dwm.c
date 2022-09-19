@@ -240,7 +240,7 @@ static void resize(Client *c, int x, int y, int w, int h, int bw, int interact);
 static void resizebarwin(Monitor *m);
 static void resizeclient(Client *c, int x, int y, int w, int h, int bw);
 static void resizemouse(const Arg *arg);
-static void resizerequest(XEvent *e);
+//static void resizerequest(XEvent *e);
 static void restack(Monitor *m);
 static void run(void);
 static void scan(void);
@@ -756,6 +756,10 @@ clientmessage(XEvent *e)
 			XAddToSaveSet(dpy, c->win);
 			XSelectInput(dpy, c->win, StructureNotifyMask | PropertyChangeMask | ResizeRedirectMask);
 			XReparentWindow(dpy, c->win, systray->win, 0, 0);
+
+            XClassHint ch = {"dwmsystray", "dwmsystray"};
+            XSetClassHint(dpy, c->win, &ch);
+
 			/* use parents background color */
 			swa.background_pixel  = scheme[SchemeNorm][ColBg].pixel;
 			XChangeWindowAttributes(dpy, c->win, CWBackPixel, &swa);
@@ -1838,18 +1842,18 @@ resizemouse(const Arg *arg)
 	}
 }
 
-void
-resizerequest(XEvent *e)
-{
-	XResizeRequestEvent *ev = &e->xresizerequest;
-	Client *i;
-
-	if ((i = wintosystrayicon(ev->window))) {
-		updatesystrayicongeom(i, ev->width, ev->height);
-		resizebarwin(selmon);
-		updatesystray();
-	}
-}
+//void
+//resizerequest(XEvent *e)
+//{
+//	XResizeRequestEvent *ev = &e->xresizerequest;
+//	Client *i;
+//
+//	if ((i = wintosystrayicon(ev->window))) {
+//		updatesystrayicongeom(i, ev->width, ev->height);
+//		resizebarwin(selmon);
+//		updatesystray();
+//	}
+//}
 
 void
 restack(Monitor *m)
@@ -2292,7 +2296,7 @@ tile(Monitor *m)
 	if (n == 0)
 		return;
 
-	if (n == 1 || strcmp("lx-music-desktop","aaabb"))
+	if (n == 1)
 		bw = 0;
 	else
 		bw = borderpx;
@@ -2327,6 +2331,7 @@ togglebar(const Arg *arg)
 	updatebarpos(selmon);
 //	XMoveResizeWindow(dpy, selmon->barwin, selmon->wx + sp, selmon->by + vp, selmon->ww - 2 * sp, bh);
 //-	XMoveResizeWindow(dpy, selmon->barwin, selmon->wx, selmon->by, selmon->ww, bh);
+    selmon->by = selmon->by + 10;
 	resizebarwin(selmon);
 	if (showsystray) {
 		XWindowChanges wc;
@@ -2564,10 +2569,10 @@ updatebarpos(Monitor *m)
 	m->wh = m->mh;
 	if (m->showbar) {
 		m->wh = m->wh - vertpad - bh;
-		m->by = m->topbar ? m->wy : m->wy + m->wh + vertpad;
-		m->wy = m->topbar ? m->wy + bh + vp : m->wy;
+		m->by = m->topbar ? m->wy : m->wy + m->wh + vertpad +10;
+		m->wy = m->topbar ? m->wy + bh + vp : m->wy + 10;
 	} else
-		m->by = -bh - vp;
+		m->by = -bh - vp - 10;
 }
 
 void
@@ -2792,7 +2797,6 @@ updatesystray(void)
 	Client *i;
 	Monitor *m = systraytomon(NULL);
 	unsigned int x = m->mx + m->mw- sp;
-	unsigned int y = m->my;
 	unsigned int sw = TEXTW(stext) - lrpad + systrayspacing;
 	unsigned int w = 1;
 
@@ -2805,7 +2809,7 @@ updatesystray(void)
 		if (!(systray = (Systray *)calloc(1, sizeof(Systray))))
 			die("fatal: could not malloc() %u bytes\n", sizeof(Systray));
 
-        m->by = m->by + 10;
+        //m->by = m->by + 10;
 		systray->win = XCreateSimpleWindow(dpy, root, x, m->by, w, bh, 0, 0, scheme[SchemeSel][ColBg].pixel);
 		wa.event_mask        = ButtonPressMask | ExposureMask;
 		wa.override_redirect = True;
