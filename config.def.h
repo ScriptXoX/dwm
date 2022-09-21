@@ -11,6 +11,7 @@ static const unsigned int snap      = 32;       /* snap pixel */
 
 static const int swallowfloating    = 1;        /* 1 means swallow floating windows by default */
 
+static const int newclientathead    = 0;        /* 定义新窗口在栈顶还是栈底 */
 
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayonleft = 0;   	/* 0: systray in the right corner, >0: systray on left of status text */
@@ -78,18 +79,24 @@ static Sp scratchpads[] = {
 
 
 static const char *const autostart[] = {
-	"dwmblocks",NULL,
+	"dwmblocks",NULL, 
     "redshift",NULL,
     "fcitx5",NULL,
     "picom","-b","--experimental-backends",NULL,
     "sh","-c","sudo echo 3 | sudo tee /proc/sys/net/ipv4/tcp_fastopen ",NULL,
     "trojan","-c","/etc/trojan/config.json",NULL,
-    "sh","-c","feh --bg-center ~/wallpaper/ios-11-stock-original-4k-ij-2880x1800.jpg",NULL,
-    "xmodmap ~/.xmodmaprc",NULL,
+    "sh","-c","feh --bg-center ~/.wallpaper/ios-11-stock-original-4k-ij-2880x1800.jpg",NULL,
+    "sh","-c","xmodmap","~/.Xmodmap",NULL,
     "wmname","LG3D",NULL,
     "batsignal","-b",NULL,
     "twmnd",NULL,
-    "sh", "-c","~/.dwm/clock.sh",NULL, 
+
+    "autocutsel","-s","PRIMARY",NULL,
+    "autocutsel",NULL,
+
+    "sh","-c","~/.dwm/clock.sh",NULL, 
+
+    "sh","-c","libinput-gestures","-c","~/.config/libinput-gestures.conf",NULL,
    //"sh", "-c","~/.dwm/battery-status.sh",NULL,
  //   "sh","-c","~/.dwm/bin/terminal",NULL
 };
@@ -183,9 +190,9 @@ static const Key keys[] = {
 	{ MODKEY,                       	XK_space,  zoom,           {0} },
 	{ MODKEY,                       	XK_Tab,    view,           {0} },
 	{ MODKEY,                       	XK_q,      killclient,     {0} },
-	{ MODKEY,                       	XK_t,      setlayout,      {.v = &layouts[0]} },
+	{ MODKEY|ShiftMask,                 XK_t,      setlayout,      {.v = &layouts[0]} },
 //	{ MODKEY,                       	XK_f,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       	XK_m,      setlayout,      {.v = &layouts[2]} },
+	{ MODKEY|ShiftMask,                 XK_m,      setlayout,      {.v = &layouts[2]} },
     { MODKEY,                           XK_u,      setlayout,      {.v = &layouts[3]} },
 	{ MODKEY,                           XK_o,      setlayout,      {.v = &layouts[4]} },
 
@@ -196,14 +203,13 @@ static const Key keys[] = {
 
     { MODKEY|ShiftMask,            		XK_Return, togglescratch,  {.ui = 0 } },
 	{ MODKEY,            				XK_e,	   togglescratch,  {.ui = 1 } },
-	{ MODKEY|ShiftMask,            		XK_m,	   togglescratch,  {.ui = 2 } },
+	{ MODKEY,                   		XK_m,	   togglescratch,  {.ui = 2 } },
 
 
 	{ MODKEY|ShiftMask,             	XK_l,      spawn,          {.v = lock } },
 
 
-	{ MODKEY,                   		XK_o,	   spawn,          SHCMD("sh ~/.dwm/mouse_enable.sh")},
-	{ MODKEY|ShiftMask,             	XK_o,	   spawn,          SHCMD("sh ~/.dwm/mouse_disable.sh")},
+	{ MODKEY,                   		XK_s,	   spawn,          SHCMD("pavucontrol-qt")},
 
 
 //	{ MODKEY,                       	XK_0,      view,           {.ui = ~0 } },
@@ -217,11 +223,11 @@ static const Key keys[] = {
 	{ Mod1Mask,                     	XK_equal,  setgaps,        {.i = -2 } },
 	{ Mod1Mask|ShiftMask,           	XK_equal,  setgaps,        {.i = 0  } },
 
-        { 0,                            	XF86XK_AudioMute,           spawn,  SHCMD("pamixer -t;pkill -RTMIN+10 dwmblocks;") },
-	{ 0,                            	XF86XK_AudioRaiseVolume,    spawn,      SHCMD("pamixer --allow-boost -i 5;pkill -RTMIN+10 dwmblocks") },
-	{ 0,                            	XF86XK_AudioLowerVolume,    spawn,      SHCMD("pamixer --allow-boost -d 5;pkill -RTMIN+10 dwmblocks") },
+    { 0,                            	XF86XK_AudioMute,           spawn,  SHCMD("pamixer -t;pkill -RTMIN+10 dwmblocks;") },
+	{ 0,                            	XF86XK_AudioRaiseVolume,    spawn,  SHCMD("pamixer --allow-boost -i 5;pkill -RTMIN+10 dwmblocks") },
+	{ 0,                            	XF86XK_AudioLowerVolume,    spawn,  SHCMD("pamixer --allow-boost -d 5;pkill -RTMIN+10 dwmblocks") },
 
-	{ 0,                            	XF86XK_Calculator,          spawn,      SHCMD("st -e bc -l") },
+	{ 0,                            	XF86XK_Calculator,          spawn,  SHCMD("st -e bc -l") },
 
    	{ 0,                            	XF86XK_MonBrightnessUp,	    spawn,	SHCMD("light -A 5; pkill -RTMIN+7 dwmblocks") },
 	{ 0,                            	XF86XK_MonBrightnessDown,   spawn,	SHCMD("light -U 5; pkill -RTMIN+7 dwmblocks") },
