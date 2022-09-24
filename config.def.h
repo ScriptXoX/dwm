@@ -69,11 +69,13 @@ const char *spcmd1[] = {"st", "-n", "spterm", "-g", "120x34", NULL };
 const char *spcmd2[] = {"st", "-n", "spfm",   "-g", "144x41", "-e", "ranger", NULL };
 //const char *spcmd3[] = {"sh", "-n", "spmusic", "~/bin/music.sh",NULL };
 const char *spcmd3[] = {"st", "-n", "spmusic", "-g", "120x34", "-e", "cmus", NULL };
+const char *spcmd4[] = {"st", "-n", "spchat", "-g", "120x34", "-e", "wechat-uos", NULL };
 static Sp scratchpads[] = {
 	/* name          cmd  */
 	{"spterm",      spcmd1},
 	{"spranger",    spcmd2},
 	{"spmusic",   spcmd3},
+	{"spchat",   spcmd4},
 };
 
 
@@ -104,7 +106,6 @@ static const char *const autostart[] = {
 
 /* tagging */
 static const char *tags[] = { "1.cmd", "2.web", "3.code", "4.note","5.read","6.video", "7.music", "8.wmware", "9.otheres" };
-//static const char *tags[] = { "", "", "", "", "", "", "", "﬏", "", "" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -118,6 +119,7 @@ static const Rule rules[] = {
 
 
 	{ "code-oss",                NULL,                       NULL,       1<<2,         0,          0,          -1,       -1 },
+	{ "weixin",                  NULL,                       NULL,       1<<8,         0,          0,          -1,       -1 },
 
 	{ "VNote",                   NULL,                       NULL,       1<<3,         0,          0,          -1,       -1 },
 	{ "WizNote",                 NULL,                       NULL,       1<<3,         0,          0,          -1,       -1 },
@@ -137,11 +139,12 @@ static const Rule rules[] = {
 
 	{ NULL,	       	             "spterm",		             NULL,		SPTAG(0),		1,		   1,           0,       -1 },
 	{ NULL,		                 "spfm",		             NULL,		SPTAG(1),		1,		   0,           -1,       -1 },
-	{ NULL,		                 "spmusic",  	 NULL,		SPTAG(2),		1,		   0,           -1,       -1 },
+	{ NULL,		                 "spmusic",  	             NULL,		SPTAG(2),		1,		   0,           -1,       -1 },
+	{ NULL,		                 "spchat",  	             NULL,		SPTAG(3),		1,		   0,            0,       -1 },
 };
 
 /* layout(s) */
-static const float mfact     = 0.75; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
@@ -204,6 +207,7 @@ static const Key keys[] = {
     { MODKEY|ShiftMask,            		XK_Return, togglescratch,  {.ui = 0 } },
 	{ MODKEY,            				XK_e,	   togglescratch,  {.ui = 1 } },
 	{ MODKEY,                   		XK_m,	   togglescratch,  {.ui = 2 } },
+//	{ MODKEY,                   		XK_c,	   togglescratch,  {.ui = 3 } },
 
 
 	{ MODKEY|ShiftMask,             	XK_l,      spawn,          {.v = lock } },
