@@ -204,9 +204,10 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             	XK_space,  togglefloating, {0} },
 
 
-    { MODKEY|ShiftMask,            		XK_Return, togglescratch,  {.ui = 0 } },
-	{ MODKEY,            				XK_e,	   togglescratch,  {.ui = 1 } },
-	{ MODKEY,                   		XK_m,	   togglescratch,  {.ui = 2 } },
+    { MODKEY|ShiftMask,                 XK_Return, togglescratch,  {.ui = 0 } },
+    { Mod1Mask,                   		XK_Return, togglescratch,  {.ui = 0 } },
+	{ Mod1Mask,            				XK_e,	   togglescratch,  {.ui = 1 } },
+	{ Mod1Mask,                   		XK_m,	   togglescratch,  {.ui = 2 } },
 //	{ MODKEY,                   		XK_c,	   togglescratch,  {.ui = 3 } },
 
 
